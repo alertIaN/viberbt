@@ -16,7 +16,7 @@ app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='alert',
     avatar='https://catherineasquithgallery.com/uploads/posts/2021-02/1614273640_4-p-chernii-fon-bez-nichego-odnotonnii-4.jpg',
-    auth_token=''4f23aa29a427e2fb-fa8e9a3060c3da70-6776e5a55140e12e''
+    auth_token='4f23aa29a427e2fb-fa8e9a3060c3da70-6776e5a55140e12e'
 ))
 
 
