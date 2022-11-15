@@ -1,5 +1,4 @@
 from flask import Flask, request, Response
-import viberbot
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
@@ -13,15 +12,17 @@ from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 app = Flask(__name__)
+# сюда нужно вставить инфу со своего бота
 viber = Api(BotConfiguration(
     name='alert',
-    avatar='',
-    auth_token='4f23aa29a427e2fb-fa8e9a3060c3da70-6776e5a55140e12e'
+    avatar='https://catherineasquithgallery.com/uploads/posts/2021-02/1614273640_4-p-chernii-fon-bez-nichego-odnotonnii-4.jpg',
+    auth_token=''4f23aa29a427e2fb-fa8e9a3060c3da70-6776e5a55140e12e''
 ))
 
 
 @app.route('/', methods=['POST'])
 def incoming():
+    logger.debug("received request. post data: {0}".format(request.get_data()))
     # every viber message is signed, you can verify the signature using this method
     if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
         return Response(status=403)
@@ -40,7 +41,7 @@ def incoming():
             TextMessage(text="thanks for subscribing!")
         ])
     elif isinstance(viber_request, ViberFailedRequest):
-        print('sosi')
+        logger.warn("client failed receiving message. failure: {0}".format(viber_request))
 
     return Response(status=200)
 
