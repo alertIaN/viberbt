@@ -46,4 +46,4 @@ def incoming():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=4040, debug=True)
-    viber.set_webhook('https://953f-185-79-2-221.eu.ngrok.io')
+    viber.set_webhook('https://viberbt.herokuapp.com/')
